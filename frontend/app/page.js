@@ -10,6 +10,8 @@ import FormModal from '@/components/FormModal';
 import Peta from '@/components/Peta';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
+import Parallax3D from '@/components/Parallax3D';
+import Cube3D from '@/components/Cube3D';
 import { useToast } from '@/components/ToastProvider';
 import { api } from '@/lib/api';
 
@@ -184,6 +186,7 @@ export default function Home() {
   return (
     <>
       <ScrollReveal />
+      <Parallax3D />
       <Navbar />
       <Hero search={filters.search} onSearch={(v) => handleFilterChange('search', v)} />
       <Stats stats={stats} />
@@ -201,6 +204,8 @@ export default function Home() {
       />
 
       <section className="kelola" id="kelola">
+        <Cube3D className="decor-cube decor-cube-a" size={80} />
+        <Cube3D className="decor-cube decor-cube-b" size={54} />
         <div className="section-head reveal">
           <span className="eyebrow">Manajemen Data</span>
           <h2>Kelola Data Wisata</h2>

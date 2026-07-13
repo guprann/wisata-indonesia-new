@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Cube3D from './Cube3D';
 
 function useCountUp(target, decimals = 0, start) {
   const [value, setValue] = useState(0);
@@ -53,6 +54,8 @@ export default function Stats({ stats }) {
 
   return (
     <section className="stats" id="stats" ref={ref}>
+      <Cube3D className="decor-cube decor-cube-a" size={72} />
+      <Cube3D className="decor-cube decor-cube-b" size={48} />
       <div className="section-head reveal">
         <span className="eyebrow">Data Terkini</span>
         <h2>Kekayaan Wisata dalam Angka</h2>

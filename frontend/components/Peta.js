@@ -1,5 +1,7 @@
 'use client';
 
+import Cube3D from './Cube3D';
+
 export default function Peta({ marker }) {
   let src = null;
   if (marker && marker.latitude && marker.longitude) {
@@ -10,6 +12,8 @@ export default function Peta({ marker }) {
 
   return (
     <section className="peta" id="peta">
+      <Cube3D className="decor-cube decor-cube-a" size={70} />
+      <Cube3D className="decor-cube decor-cube-b" size={50} />
       <div className="section-head reveal">
         <span className="eyebrow">Sebaran Lokasi</span>
         <h2>Peta Wisata Nusantara</h2>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Logo from './Logo';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +33,7 @@ export default function Navbar() {
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-container">
           <a href="#hero" className="brand">
-            <span className="brand-icon">🌴</span>
+            <span className="brand-icon"><Logo size={34} /></span>
             <span className="brand-text">
               Pesona<span>Nusantara</span>
             </span>
@@ -43,7 +44,13 @@ export default function Navbar() {
                 {label}
               </a>
             ))}
+            <a href="#kelola" className="nav-cta mobile-only" onClick={() => setOpen(false)}>
+              Mulai Sekarang
+            </a>
           </nav>
+          <a href="#kelola" className="nav-cta">
+            Mulai Sekarang <span aria-hidden>→</span>
+          </a>
           <button className="nav-toggle" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
             <span></span>
             <span></span>

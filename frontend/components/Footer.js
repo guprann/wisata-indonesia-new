@@ -1,9 +1,11 @@
+import Logo from './Logo';
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-brand reveal reveal-left">
-          <span className="brand-icon">🌴</span>
+          <span className="brand-icon"><Logo size={52} /></span>
           <h3>Pesona Nusantara</h3>
           <p>Menjelajahi keindahan Indonesia, satu wisata dalam satu waktu.</p>
         </div>
