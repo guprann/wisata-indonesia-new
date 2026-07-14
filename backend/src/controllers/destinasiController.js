@@ -1,4 +1,5 @@
 const Destinasi = require('../models/Destinasi');
+const aiService = require('../services/aiService');
 
 // Menentukan id numerik berikutnya (berurutan)
 async function nextId() {
@@ -158,6 +159,30 @@ exports.update = async (req, res, next) => {
       return res.status(404).json({ message: `Destinasi dengan id ${req.params.id} tidak ditemukan.` });
     }
     res.json({ message: 'Destinasi berhasil diperbarui (PATCH).', data: updated });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// POST /api/destinasi/:id/ask  (AI tanya-jawab tentang destinasi)
+exports.ask = async (req, res, next) => {
+  try {
+    const question = (req.body && req.body.question ? String(req.body.question) : '').trim();
+    if (!question) {
+      return res.status(400).json({ message: 'Field "question" wajib diisi.' });
+    }
+    if (question.length > 500) {
+      return res.status(400).json({ message: 'Pertanyaan terlalu panjang (maksimal 500 karakter).' });
+    }
+
+    const item = await Destinasi.findOne({ id: Number(req.params.id) }).lean();
+    if (!item) {
+      return res.status(404).json({ message: `Destinasi dengan id ${req.params.id} tidak ditemukan.` });
+    }
+
+    const history = Array.isArray(req.body.history) ? req.body.history : [];
+    const { answer, source } = await aiService.ask(item, question, history);
+    res.json({ answer, source });
   } catch (err) {
     next(err);
   }

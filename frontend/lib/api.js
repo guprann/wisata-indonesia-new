@@ -27,6 +27,11 @@ export const api = {
   replace: (id, body) => request(`/destinasi/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
   update: (id, body) => request(`/destinasi/${id}`, { method: 'PATCH', body: JSON.stringify(body) }),
   remove: (id) => request(`/destinasi/${id}`, { method: 'DELETE' }),
+  ask: (id, question, history = []) =>
+    request(`/destinasi/${id}/ask`, {
+      method: 'POST',
+      body: JSON.stringify({ question, history }),
+    }),
   stats: () => request('/stats'),
   meta: () => request('/meta'),
 };
