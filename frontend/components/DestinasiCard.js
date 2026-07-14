@@ -1,10 +1,37 @@
 'use client';
 
+import { useCallback, useRef } from 'react';
 import { safeImg, formatNumber, formatRupiah, PLACEHOLDER } from '@/lib/api';
 
 export default function DestinasiCard({ item, index, limit, onDetail, onEdit, onDelete }) {
+  const cardRef = useRef(null);
+
+  // Tilt 3D interaktif mengikuti posisi kursor di atas kartu
+  const handleMove = useCallback((e) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `translateY(-10px) rotateX(${-py * 10}deg) rotateY(${px * 12}deg) scale(1.02)`;
+    el.style.setProperty('--gx', `${(px + 0.5) * 100}%`);
+    el.style.setProperty('--gy', `${(py + 0.5) * 100}%`);
+  }, []);
+
+  const handleLeave = useCallback(() => {
+    const el = cardRef.current;
+    if (el) el.style.transform = '';
+  }, []);
+
   return (
-    <article className="dest-card" style={{ animationDelay: `${(index % limit) * 60}ms` }}>
+    <article
+      className="dest-card"
+      ref={cardRef}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ animationDelay: `${(index % limit) * 60}ms` }}
+    >
+      <span className="card-glare" aria-hidden="true" />
       <div className="card-img">
         <img
           key={item.gambar}

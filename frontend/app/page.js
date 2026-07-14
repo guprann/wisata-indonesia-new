@@ -12,6 +12,7 @@ import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 import Parallax3D from '@/components/Parallax3D';
 import Cube3D from '@/components/Cube3D';
+import NatureScene from '@/components/NatureScene';
 import { useToast } from '@/components/ToastProvider';
 import { api } from '@/lib/api';
 
@@ -187,6 +188,7 @@ export default function Home() {
     <>
       <ScrollReveal />
       <Parallax3D />
+      <NatureScene />
       <Navbar />
       <Hero search={filters.search} onSearch={(v) => handleFilterChange('search', v)} />
       <Stats stats={stats} />

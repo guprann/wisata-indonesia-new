@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
+import FloatingIsland from './FloatingIsland';
 
 export default function Hero({ search, onSearch }) {
   const stageRef = useRef(null);
@@ -28,26 +29,20 @@ export default function Hero({ search, onSearch }) {
       <div className="hero-photo" />
       <div className="hero-overlay" />
 
+      {/* Lapisan gunung 3D parallax di dasar hero */}
+      <div className="hero-mountains" aria-hidden="true">
+        <div className="mtn mtn-far" />
+        <div className="mtn mtn-mid" />
+        <div className="mtn mtn-near" />
+        <div className="hero-mist" />
+      </div>
+
       {/* 3D interactive scene */}
       <div
         className="hero-scene"
         style={{ transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)` }}
       >
-        <div className="orbit-system">
-          <div className="globe">
-            <div className="globe-land" />
-            <div className="globe-glow" />
-          </div>
-          <div className="orbit orbit-1">
-            <span className="sat" />
-          </div>
-          <div className="orbit orbit-2">
-            <span className="sat" />
-          </div>
-          <div className="orbit orbit-3">
-            <span className="sat" />
-          </div>
-        </div>
+        <FloatingIsland />
 
         <div className="float-card fc-1">
           <span className="fc-emoji">🏝️</span>
