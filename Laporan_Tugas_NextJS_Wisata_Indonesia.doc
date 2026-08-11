@@ -1,0 +1,340 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Laporan Tugas NextJS - Wisata Indonesia</title>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+<style>
+  @page { size: A4; margin: 3cm 3cm 3cm 4cm; }
+  body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; text-align: justify; }
+  h1 { font-size: 14pt; text-align: center; font-weight: bold; text-transform: uppercase; }
+  h2 { font-size: 12pt; font-weight: bold; margin-top: 18pt; }
+  h3 { font-size: 12pt; font-weight: bold; }
+  p.cover { text-align: center; }
+  table { border-collapse: collapse; width: 100%; font-size: 11pt; }
+  th, td { border: 1px solid #000; padding: 4pt 6pt; vertical-align: top; }
+  th { background: #e8e8e8; }
+  pre { font-family: "Courier New", monospace; font-size: 10pt; background: #f4f4f4; border: 1px solid #ccc; padding: 8pt; line-height: 1.2; white-space: pre-wrap; }
+  .ss { color: #b00; font-weight: bold; background: #fff3cd; padding: 4pt; border: 1px dashed #b00; text-align: center; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>LAPORAN TUGAS<br>PENGEMBANGAN APLIKASI WEB &quot;WISATA INDONESIA&quot; MENGGUNAKAN NEXTJS</h1>
+<br><br><br>
+<p class="cover"><b>Disusun Oleh:</b></p>
+<p class="cover">Nama&nbsp;: (isi nama kamu)<br>
+NIM&nbsp;: 105841105024<br>
+Program Studi&nbsp;: (isi prodi)<br>
+Mata Kuliah&nbsp;: (isi mata kuliah)<br>
+Dosen Pengampu&nbsp;: (isi nama dosen)</p>
+<br><br><br>
+<p class="cover"><b>UNIVERSITAS MUHAMMADIYAH MAKASSAR<br>2026</b></p>
+
+<div class="pagebreak"></div>
+
+<h2>BAB I — PENDAHULUAN</h2>
+
+<h3>1.1 Latar Belakang</h3>
+<p>Perkembangan teknologi informasi mendorong perubahan besar dalam cara aplikasi web dibangun. Aplikasi web modern dituntut untuk interaktif, responsif, cepat, dan mampu menyajikan data secara dinamis tanpa perlu memuat ulang halaman. Untuk memenuhi tuntutan tersebut, muncul berbagai framework dan library JavaScript, di antaranya ReactJS yang dikembangkan oleh Meta dan NextJS yang dikembangkan oleh Vercel. Kedua teknologi ini menjadi standar industri karena menawarkan pendekatan pengembangan berbasis komponen (component-based) yang membuat kode lebih modular, terstruktur, mudah diuji, dan dapat digunakan ulang (reusable).</p>
+<p>Selain teknologi frontend, aplikasi web modern umumnya menerapkan arsitektur terpisah antara antarmuka pengguna (frontend) dan penyedia data (backend) yang dihubungkan melalui RESTful API. Arsitektur ini memungkinkan setiap bagian dikembangkan, diuji, dan dikembangkan lebih lanjut secara independen.</p>
+<p>Di sisi lain, Indonesia merupakan negara dengan kekayaan destinasi wisata yang sangat besar, tersebar di 38 provinsi dengan beragam kategori seperti wisata alam, budaya, bahari, hingga taman hiburan. Namun, informasi mengenai destinasi tersebut kerap tersebar di berbagai sumber dan tidak terstruktur. Berdasarkan permasalahan tersebut dan sebagai implementasi capaian pembelajaran mata kuliah, penulis membangun aplikasi web <b>&quot;Wisata Indonesia&quot;</b> — katalog destinasi wisata Indonesia berbasis NextJS dengan dukungan REST API berbasis Express dan MongoDB.</p>
+
+<h3>1.2 Rumusan Masalah</h3>
+<ol>
+<li>Bagaimana membangun aplikasi web modern menggunakan framework NextJS?</li>
+<li>Bagaimana menerapkan konsep komponen, JSX, props, state, dan lifecycle dalam aplikasi?</li>
+<li>Bagaimana menerapkan routing pada aplikasi NextJS?</li>
+<li>Bagaimana mengintegrasikan aplikasi frontend dengan RESTful API agar data ditampilkan dan dikelola secara dinamis?</li>
+</ol>
+
+<h3>1.3 Tujuan</h3>
+<ol>
+<li>Mengimplementasikan konsep dasar ReactJS: komponen, JSX, dan props.</li>
+<li>Menerapkan manajemen state dan lifecycle menggunakan React Hooks (useState, useEffect, useCallback, useRef).</li>
+<li>Menerapkan routing menggunakan App Router bawaan NextJS.</li>
+<li>Mengintegrasikan aplikasi dengan RESTful API untuk operasi data dinamis (Create, Read, Update, Delete).</li>
+</ol>
+
+<h3>1.4 Manfaat</h3>
+<ol>
+<li><b>Bagi pengguna:</b> menyediakan media informasi destinasi wisata Indonesia yang terpusat, dilengkapi pencarian, filter, statistik, dan peta lokasi.</li>
+<li><b>Bagi penulis:</b> meningkatkan pemahaman dan keterampilan pengembangan aplikasi web full-stack menggunakan teknologi JavaScript modern.</li>
+<li><b>Bagi akademik:</b> menjadi referensi implementasi NextJS dan REST API bagi mahasiswa lain.</li>
+</ol>
+
+<div class="pagebreak"></div>
+
+<h2>BAB II — LANDASAN TEORI</h2>
+
+<h3>2.1 Aplikasi Web Modern</h3>
+<p>Aplikasi web modern berbeda dengan situs web statis tradisional. Pada model tradisional (multi-page application), setiap interaksi pengguna menyebabkan server mengirim halaman HTML baru secara utuh. Pada aplikasi web modern yang umumnya berbentuk Single Page Application (SPA), halaman dimuat sekali, kemudian pembaruan konten dilakukan secara dinamis melalui JavaScript dengan mengambil data dari API. Pendekatan ini menghasilkan pengalaman pengguna yang lebih cepat dan mulus.</p>
+
+<h3>2.2 JavaScript dan Node.js</h3>
+<p>JavaScript adalah bahasa pemrograman utama untuk pengembangan web yang berjalan di browser. Node.js adalah runtime JavaScript di sisi server yang memungkinkan JavaScript digunakan untuk membangun backend, sehingga pengembang dapat menggunakan satu bahasa untuk keseluruhan aplikasi (full-stack JavaScript). Node.js juga menyediakan npm (Node Package Manager) untuk mengelola dependensi proyek.</p>
+
+<h3>2.3 ReactJS</h3>
+<p>ReactJS adalah library JavaScript untuk membangun antarmuka pengguna yang dikembangkan oleh Meta (Facebook) dan dirilis pada tahun 2013. Konsep-konsep utama ReactJS meliputi:</p>
+<ol>
+<li><b>Komponen (Component)</b> — unit terkecil pembangun UI yang bersifat mandiri dan dapat digunakan ulang. Sebuah halaman disusun dari banyak komponen kecil, misalnya Navbar, Card, Modal, dan Footer. Pada React modern, komponen ditulis sebagai fungsi (functional component).</li>
+<li><b>JSX (JavaScript XML)</b> — ekstensi sintaks yang memungkinkan penulisan struktur mirip HTML di dalam kode JavaScript. JSX membuat struktur UI lebih mudah dibaca dan dipelihara.</li>
+<li><b>Props (Properties)</b> — mekanisme pengiriman data dari komponen induk ke komponen anak. Props bersifat read-only sehingga aliran data satu arah (one-way data flow) dan mudah dilacak.</li>
+<li><b>Virtual DOM</b> — representasi DOM di memori. Saat state berubah, React membandingkan Virtual DOM lama dan baru (diffing), lalu hanya memperbarui bagian DOM nyata yang berubah, sehingga render efisien.</li>
+</ol>
+
+<h3>2.4 State dan Lifecycle (React Hooks)</h3>
+<p>State adalah data internal komponen yang dapat berubah selama aplikasi berjalan; setiap perubahan state memicu render ulang UI. Lifecycle adalah tahapan hidup komponen: dipasang (mount), diperbarui (update), dan dilepas (unmount). Sejak React 16.8, keduanya dikelola pada functional component menggunakan Hooks:</p>
+<ol>
+<li><b>useState</b> — mendeklarasikan state dan fungsi pengubahnya, contoh: <i>const [items, setItems] = useState([])</i>.</li>
+<li><b>useEffect</b> — menjalankan efek samping (side effect) seperti pengambilan data API. Perilakunya dikendalikan array dependensi: [] berarti berjalan sekali saat mount (setara componentDidMount); [filters] berarti berjalan setiap filters berubah; fungsi yang di-return berperan sebagai cleanup saat update/unmount.</li>
+<li><b>useCallback</b> — memoisasi fungsi agar tidak dibuat ulang setiap render, berguna untuk optimasi.</li>
+<li><b>useRef</b> — menyimpan nilai yang bertahan antar-render tanpa memicu render ulang, misalnya untuk menyimpan ID timer.</li>
+</ol>
+
+<h3>2.5 NextJS</h3>
+<p>NextJS adalah framework React yang dikembangkan Vercel dan menyediakan fitur produksi siap pakai, antara lain:</p>
+<ol>
+<li><b>Routing berbasis sistem berkas (App Router)</b> — setiap folder dalam direktori app/ otomatis menjadi rute. Berkas page.js merepresentasikan halaman, sedangkan layout.js menjadi kerangka bersama (root layout) yang membungkus seluruh halaman. Dengan ini, pengembang tidak perlu mengonfigurasi router secara manual seperti pada React Router.</li>
+<li><b>Rendering fleksibel</b> — mendukung Server Component dan Client Component. Komponen interaktif yang menggunakan hooks ditandai direktif 'use client'.</li>
+<li><b>Optimasi bawaan</b> — code splitting otomatis, optimasi aset, dan konfigurasi melalui next.config.js.</li>
+</ol>
+
+<h3>2.6 REST API</h3>
+<p>REST (Representational State Transfer) adalah gaya arsitektur komunikasi client–server yang diperkenalkan oleh Roy Fielding (2000). Prinsip utamanya adalah stateless, berbasis resource yang diidentifikasi URL, dan menggunakan method HTTP standar:</p>
+<table>
+<tr><th>Method</th><th>Fungsi</th><th>Contoh pada aplikasi</th></tr>
+<tr><td>GET</td><td>Membaca data</td><td>GET /api/destinasi</td></tr>
+<tr><td>POST</td><td>Menambah data</td><td>POST /api/destinasi</td></tr>
+<tr><td>PUT</td><td>Mengubah data secara penuh</td><td>PUT /api/destinasi/:id</td></tr>
+<tr><td>PATCH</td><td>Mengubah sebagian data</td><td>PATCH /api/destinasi/:id</td></tr>
+<tr><td>DELETE</td><td>Menghapus data</td><td>DELETE /api/destinasi/:id</td></tr>
+</table>
+<p>Data dipertukarkan dalam format JSON (JavaScript Object Notation). Di sisi frontend, pemanggilan API dilakukan menggunakan Fetch API bawaan browser.</p>
+
+<h3>2.7 Express, MongoDB, dan Swagger</h3>
+<p><b>Express</b> adalah framework web minimalis untuk Node.js yang menyederhanakan pembuatan REST API melalui sistem routing dan middleware (misalnya cors untuk izin akses lintas origin dan express.json() untuk parsing body JSON). <b>MongoDB</b> adalah basis data NoSQL berbasis dokumen yang menyimpan data dalam format mirip JSON (BSON), diakses melalui ODM <b>Mongoose</b> yang menyediakan skema dan validasi data. <b>Swagger (OpenAPI)</b> adalah standar dokumentasi API interaktif yang memudahkan pengujian endpoint langsung dari browser.</p>
+
+<div class="pagebreak"></div>
+
+<h2>BAB III — METODE / LANGKAH KERJA</h2>
+
+<h3>3.1 Alat dan Bahan</h3>
+<table>
+<tr><th>Alat/Bahan</th><th>Keterangan</th></tr>
+<tr><td>Node.js 18+ dan npm</td><td>Runtime dan manajer paket</td></tr>
+<tr><td>Visual Studio Code</td><td>Editor kode</td></tr>
+<tr><td>MongoDB</td><td>Basis data (lokal)</td></tr>
+<tr><td>Git dan GitHub</td><td>Version control dan publikasi kode</td></tr>
+<tr><td>Browser (Chrome/Edge)</td><td>Pengujian aplikasi</td></tr>
+<tr><td>Dataset DATASETWISATA_FINAL.csv</td><td>Sumber data destinasi wisata</td></tr>
+</table>
+
+<h3>3.2 Tahapan Pengerjaan</h3>
+<ol>
+<li><b>Studi literatur</b> — mempelajari materi ReactJS dan NextJS dari dokumentasi resmi dan materi perkuliahan (pertemuan 9–10).</li>
+<li><b>Perencanaan</b> — menentukan aplikasi yang dibuat: katalog destinasi wisata Indonesia dengan fitur pencarian, filter (provinsi, kategori, urutan), pagination, statistik, peta lokasi, dan pengelolaan data (CRUD). Merancang arsitektur terpisah: frontend NextJS dan backend Express + MongoDB.</li>
+<li><b>Persiapan data</b> — menyiapkan dataset destinasi wisata dan melakukan seeding ke MongoDB melalui skrip backend/scripts/seed.js dengan perintah npm run seed.</li>
+<li><b>Pembangunan backend</b> — membuat REST API dengan Express dan Mongoose (backend/server.js, backend/src/), meliputi konfigurasi database, model, routes CRUD, penanganan error, serta dokumentasi Swagger di /api-docs.</li>
+<li><b>Pembangunan frontend</b> — membuat proyek NextJS (frontend/), menyusun root layout (app/layout.js), halaman utama (app/page.js), 17 komponen React (components/), dan modul API terpusat (lib/api.js).</li>
+<li><b>Pengujian</b> — menjalankan backend (port 4000) dan frontend (port 3000) lalu menguji seluruh fitur secara fungsional.</li>
+<li><b>Dokumentasi dan publikasi</b> — mengunggah kode ke GitHub (https://github.com/guprann/wisata-indonesia-new) dan menyusun laporan.</li>
+</ol>
+
+<div class="pagebreak"></div>
+
+<h2>BAB IV — HASIL DAN PEMBAHASAN</h2>
+
+<h3>4.1 Gambaran Umum Aplikasi</h3>
+<p>Aplikasi &quot;Wisata Indonesia&quot; adalah aplikasi web katalog destinasi wisata dengan arsitektur client–server. Frontend dibangun dengan NextJS 16 dan React 19, sedangkan backend berupa REST API Express 4 dengan basis data MongoDB. Struktur proyek:</p>
+<pre>wisata-indonesia-new/
+├── frontend/                 # Aplikasi NextJS
+│   ├── app/                  # App Router: layout.js, page.js, globals.css
+│   ├── components/           # 17 komponen React
+│   └── lib/                  # api.js (modul pemanggilan REST API)
+├── backend/                  # REST API Express + MongoDB
+│   ├── server.js             # Entry point server
+│   ├── src/                  # config (db, swagger), routes, models
+│   └── scripts/              # seed.js (pengisian data awal)
+└── DATASETWISATA_FINAL.csv   # Dataset destinasi wisata</pre>
+<p>Fitur aplikasi: (1) pencarian destinasi dengan debounce; (2) filter provinsi, kategori, dan pengurutan; (3) pagination &quot;muat lebih banyak&quot;; (4) statistik destinasi; (5) detail destinasi dalam modal; (6) tambah/ubah/hapus data melalui form modal; (7) peta lokasi destinasi; (8) notifikasi toast untuk umpan balik pengguna.</p>
+<p class="ss">[SCREENSHOT 1: Tampilan halaman utama aplikasi (Hero + pencarian)]</p>
+<p class="ss">[SCREENSHOT 2: Daftar destinasi wisata beserta filter provinsi/kategori]</p>
+<p class="ss">[SCREENSHOT 3: Modal detail destinasi]</p>
+<p class="ss">[SCREENSHOT 4: Form tambah/edit wisata]</p>
+<p class="ss">[SCREENSHOT 5: Peta lokasi destinasi]</p>
+<p class="ss">[SCREENSHOT 6: Halaman Swagger API Docs (http://localhost:4000/api-docs)]</p>
+
+<h3>4.2 Penerapan Komponen, JSX, dan Props</h3>
+<p>Antarmuka aplikasi dipecah menjadi 17 komponen di folder frontend/components/, antara lain: Navbar, Hero, Stats, Explore, DestinasiCard, DetailModal, FormModal, CustomSelect, Peta, Footer, ToastProvider, serta komponen dekoratif (ScrollReveal, Parallax3D, Cube3D, NatureScene). Pemecahan ini menerapkan prinsip <b>separation of concerns</b>: setiap komponen memiliki satu tanggung jawab.</p>
+<p>Halaman utama (app/page.js) merangkai komponen-komponen tersebut menggunakan <b>JSX</b> dan mengalirkan data melalui <b>props</b>:</p>
+<p class="ss">[SCREENSHOT 7: Potongan kode frontend/app/page.js bagian return (JSX)]</p>
+<pre>&lt;Hero search={filters.search} onSearch={(v) =&gt; handleFilterChange('search', v)} /&gt;
+&lt;Stats stats={stats} /&gt;
+&lt;Explore
+  items={items} total={total} loading={loading} meta={meta} filters={filters}
+  onFilterChange={handleFilterChange} onLoadMore={handleLoadMore}
+  onDetail={openDetail} onEdit={openEdit} onDelete={handleDelete}
+/&gt;</pre>
+<p><b>Pembahasan:</b> Komponen Explore menerima dua jenis props: (1) props data (items, total, loading, meta, filters) untuk ditampilkan, dan (2) props fungsi (onFilterChange, onDetail, onEdit, onDelete) sebagai callback ketika pengguna berinteraksi. Pola ini disebut <i>lifting state up</i>: state dipegang komponen induk (Home), sementara komponen anak hanya menampilkan data dan melaporkan aksi. Aliran data satu arah ini membuat perilaku aplikasi mudah dilacak dan di-debug. Direktif 'use client' pada baris pertama page.js menandakan halaman ini adalah Client Component karena menggunakan hooks dan interaksi browser.</p>
+
+<h3>4.3 Penerapan Manajemen State</h3>
+<p>Halaman utama mengelola banyak state dengan useState:</p>
+<p class="ss">[SCREENSHOT 8: Potongan kode useState di frontend/app/page.js]</p>
+<pre>const [items, setItems] = useState([]);        // daftar destinasi
+const [total, setTotal] = useState(0);         // total data di server
+const [loading, setLoading] = useState(true);  // status pemuatan
+const [stats, setStats] = useState(null);      // data statistik
+const [meta, setMeta] = useState({ provinsi: [], kategori: [] });
+const [filters, setFilters] = useState({
+  search: '', provinsi: '', kategori: '', sortValue: '', limit: LIMIT,
+});
+const [page, setPage] = useState(1);           // halaman pagination
+const [detailOpen, setDetailOpen] = useState(false); // state modal</pre>
+<p><b>Pembahasan:</b> State dikelompokkan berdasarkan fungsinya: data (items, stats, meta), kontrol UI (loading, modal), dan parameter kueri (filters, page). Pembaruan state selalu menggunakan fungsi setter secara immutable, misalnya setFilters((f) =&gt; ({ ...f, [key]: value })) yang menyalin objek lama lalu menimpa satu properti — praktik terbaik React agar perubahan terdeteksi dan render ulang berjalan benar.</p>
+
+<h3>4.4 Penerapan Lifecycle dengan useEffect</h3>
+<p class="ss">[SCREENSHOT 9: Potongan kode useEffect di frontend/app/page.js]</p>
+<pre>// (1) Berjalan SEKALI saat komponen mount — memuat statistik &amp; metadata
+useEffect(() =&gt; {
+  api.stats().then(setStats).catch(() =&gt; {});
+  api.meta().then(setMeta).catch(() =&gt; {});
+}, []);
+
+// (2) Berjalan setiap FILTER BERUBAH — dengan debounce 300ms
+useEffect(() =&gt; {
+  if (searchTimer.current) clearTimeout(searchTimer.current);
+  searchTimer.current = setTimeout(() =&gt; {
+    setPage(1);
+    loadData(true, 1);
+  }, 300);
+  return () =&gt; clearTimeout(searchTimer.current); // cleanup
+}, [filters]);</pre>
+<p><b>Pembahasan:</b> Efek (1) menggunakan array dependensi kosong [] sehingga hanya berjalan sekali saat mount — setara componentDidMount pada class component. Efek (2) berjalan setiap filters berubah dan menerapkan teknik <b>debounce</b>: pemanggilan API ditunda 300 ms dan timer sebelumnya dibatalkan, sehingga saat pengguna mengetik cepat di kolom pencarian, API hanya dipanggil sekali setelah pengguna berhenti mengetik. Fungsi yang di-return adalah <b>cleanup function</b> yang membersihkan timer saat komponen diperbarui/dilepas — mencegah memory leak. ID timer disimpan dengan useRef karena nilainya perlu bertahan antar-render tanpa memicu render ulang. Selain itu, fungsi loadData dan buildParams dibungkus useCallback agar tidak dibuat ulang setiap render.</p>
+
+<h3>4.5 Penerapan Routing</h3>
+<p>Aplikasi menggunakan <b>App Router</b> NextJS: direktori frontend/app/ berisi layout.js (root layout: struktur HTML global, metadata, dan pembungkus ToastProvider) dan page.js (halaman utama rute /). Routing berbasis folder ini adalah fitur bawaan NextJS — tidak diperlukan konfigurasi router manual. Navigasi antarbagian dalam halaman ditangani Navbar melalui anchor section (#kelola, #peta), termasuk scroll halus dengan scrollIntoView({ behavior: 'smooth' }).</p>
+<p class="ss">[SCREENSHOT 10: Struktur folder frontend/app/ di VS Code]</p>
+
+<h3>4.6 Integrasi RESTful API</h3>
+<p><b>Sisi backend</b>, REST API dibangun dengan Express (backend/server.js). Server mengaktifkan middleware cors dan parser JSON, menyajikan dokumentasi Swagger di /api-docs, memasang routes di prefix /api, serta menangani error validasi Mongoose dan error server.</p>
+<p class="ss">[SCREENSHOT 11: Potongan kode backend/server.js]</p>
+<p>Endpoint yang tersedia:</p>
+<table>
+<tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+<tr><td>GET</td><td>/api/destinasi</td><td>Daftar destinasi (search, filter, sort, pagination)</td></tr>
+<tr><td>GET</td><td>/api/destinasi/:id</td><td>Detail satu destinasi</td></tr>
+<tr><td>POST</td><td>/api/destinasi</td><td>Menambah destinasi baru</td></tr>
+<tr><td>PUT</td><td>/api/destinasi/:id</td><td>Mengubah destinasi (penuh)</td></tr>
+<tr><td>PATCH</td><td>/api/destinasi/:id</td><td>Mengubah sebagian data destinasi</td></tr>
+<tr><td>DELETE</td><td>/api/destinasi/:id</td><td>Menghapus destinasi</td></tr>
+<tr><td>GET</td><td>/api/stats</td><td>Statistik destinasi</td></tr>
+<tr><td>GET</td><td>/api/meta</td><td>Metadata (daftar provinsi, kategori)</td></tr>
+</table>
+<p><b>Sisi frontend</b>, seluruh pemanggilan API dipusatkan di modul frontend/lib/api.js:</p>
+<p class="ss">[SCREENSHOT 12: Potongan kode frontend/lib/api.js]</p>
+<pre>const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+
+async function request(path, options = {}) {
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    ...options,
+  });
+  const data = await res.json().catch(() =&gt; ({}));
+  if (!res.ok) throw new Error(data.message || 'Terjadi kesalahan.');
+  return data;
+}
+
+export const api = {
+  list:    (params) =&gt; request(`/destinasi?${qs}`),                          // GET
+  getOne:  (id)     =&gt; request(`/destinasi/${id}`),                          // GET
+  create:  (body)   =&gt; request('/destinasi', { method: 'POST', ... }),       // POST
+  replace: (id, b)  =&gt; request(`/destinasi/${id}`, { method: 'PUT', ... }),  // PUT
+  update:  (id, b)  =&gt; request(`/destinasi/${id}`, { method: 'PATCH', ... }),// PATCH
+  remove:  (id)     =&gt; request(`/destinasi/${id}`, { method: 'DELETE' }),    // DELETE
+  stats:   ()       =&gt; request('/stats'),
+  meta:    ()       =&gt; request('/meta'),
+};</pre>
+<p><b>Pembahasan:</b> Fungsi request menjadi satu pintu untuk semua pemanggilan HTTP — mengatur base URL dari environment variable, header JSON, opsi cache: 'no-store' agar data selalu segar, parsing respons, dan pelemparan error yang seragam. Pola modul API terpusat ini memudahkan pemeliharaan: jika alamat server berubah, cukup satu berkas yang diperbarui.</p>
+<p>Penerapan operasi CRUD pada halaman utama:</p>
+<pre>const handleSubmit = async (payload) =&gt; {
+  if (formMode === 'edit' &amp;&amp; formInitial) {
+    const res = await api.replace(formInitial.id, payload);   // PUT
+    setItems((prev) =&gt; prev.map((it) =&gt; (it.id === formInitial.id ? res.data : it)));
+    toast('Wisata berhasil diperbarui (PUT).');
+  } else {
+    const res = await api.create(payload);                    // POST
+    setItems((prev) =&gt; [res.data, ...prev]);
+    setTotal((t) =&gt; t + 1);
+    toast('Wisata baru berhasil ditambahkan (POST).');
+  }
+};
+
+const handleDelete = async (item) =&gt; {
+  await api.remove(item.id);                                  // DELETE
+  setItems((prev) =&gt; prev.filter((it) =&gt; it.id !== item.id));
+  setTotal((t) =&gt; Math.max(0, t - 1));
+  toast(`&quot;${item.nama}&quot; berhasil dihapus (DELETE).`);
+};</pre>
+<p><b>Pembahasan:</b> Setelah operasi API berhasil, state items langsung diperbarui secara lokal — item baru ditambahkan di urutan teratas, item yang diubah diganti dengan map, dan item yang dihapus dibuang dengan filter — sehingga perubahan terlihat seketika tanpa memuat ulang halaman. Setiap aksi juga memberikan umpan balik melalui notifikasi toast dan penanganan error try/catch. Bagian ini menunjukkan sinergi utuh antara <b>REST API</b> dan <b>manajemen state React</b>, sekaligus memenuhi capaian pembelajaran integrasi RESTful API.</p>
+
+<h3>4.7 Pengujian</h3>
+<p>Pengujian fungsional dilakukan dengan menjalankan backend (npm run dev, port 4000) dan frontend (npm run dev, port 3000):</p>
+<table>
+<tr><th>No</th><th>Skenario Uji</th><th>Hasil yang Diharapkan</th><th>Hasil</th></tr>
+<tr><td>1</td><td>Membuka halaman utama</td><td>Daftar destinasi dan statistik tampil</td><td>Berhasil</td></tr>
+<tr><td>2</td><td>Mengetik kata kunci pencarian</td><td>Daftar terfilter setelah jeda 300 ms</td><td>Berhasil</td></tr>
+<tr><td>3</td><td>Memilih filter provinsi/kategori</td><td>Daftar terfilter sesuai pilihan</td><td>Berhasil</td></tr>
+<tr><td>4</td><td>Klik &quot;muat lebih banyak&quot;</td><td>Data halaman berikutnya ditambahkan</td><td>Berhasil</td></tr>
+<tr><td>5</td><td>Membuka detail destinasi</td><td>Modal detail tampil dengan data lengkap</td><td>Berhasil</td></tr>
+<tr><td>6</td><td>Menambah data (POST)</td><td>Data tampil teratas + notifikasi sukses</td><td>Berhasil</td></tr>
+<tr><td>7</td><td>Mengubah data (PUT)</td><td>Data diperbarui seketika + notifikasi</td><td>Berhasil</td></tr>
+<tr><td>8</td><td>Menghapus data (DELETE)</td><td>Data hilang dari daftar + notifikasi</td><td>Berhasil</td></tr>
+<tr><td>9</td><td>Menampilkan lokasi di peta</td><td>Peta menampilkan marker destinasi</td><td>Berhasil</td></tr>
+<tr><td>10</td><td>Mengakses Swagger docs</td><td>Dokumentasi API interaktif tampil</td><td>Berhasil</td></tr>
+</table>
+<p class="ss">[SCREENSHOT 13: Hasil uji tambah data — notifikasi &quot;Wisata baru berhasil ditambahkan (POST)&quot;]</p>
+<p class="ss">[SCREENSHOT 14: Hasil uji hapus data — notifikasi &quot;berhasil dihapus (DELETE)&quot;]</p>
+
+<div class="pagebreak"></div>
+
+<h2>BAB V — KESIMPULAN DAN SARAN</h2>
+
+<h3>5.1 Kesimpulan</h3>
+<ol>
+<li>Aplikasi web &quot;Wisata Indonesia&quot; berhasil dibangun menggunakan NextJS 16 dan React 19 dengan arsitektur client–server yang terpisah antara frontend dan backend REST API (Express + MongoDB).</li>
+<li>Seluruh capaian pembelajaran terpenuhi: (a) konsep komponen, JSX, dan props diterapkan melalui 17 komponen modular dengan aliran data satu arah; (b) manajemen state dan lifecycle diterapkan menggunakan useState, useEffect (termasuk cleanup dan debounce), useCallback, dan useRef; (c) routing diterapkan melalui App Router bawaan NextJS; (d) integrasi RESTful API diterapkan penuh untuk operasi CRUD (GET, POST, PUT, PATCH, DELETE).</li>
+<li>Penerapan praktik terbaik seperti debounce pencarian, pembaruan state immutable, modul API terpusat, penanganan error, dan umpan balik toast meningkatkan kualitas kode dan pengalaman pengguna.</li>
+</ol>
+
+<h3>5.2 Saran</h3>
+<ol>
+<li>Menambahkan autentikasi dan otorisasi pengguna agar operasi tambah/ubah/hapus data lebih aman.</li>
+<li>Menambahkan fitur ulasan dan rating destinasi oleh pengguna.</li>
+<li>Melakukan deployment ke layanan cloud (Vercel untuk frontend, MongoDB Atlas untuk basis data) agar aplikasi dapat diakses publik.</li>
+<li>Menambahkan halaman detail per destinasi dengan dynamic route (app/destinasi/[id]/page.js) untuk memperdalam penerapan routing NextJS.</li>
+</ol>
+
+<div class="pagebreak"></div>
+
+<h2>DAFTAR PUSTAKA</h2>
+<ol>
+<li>Meta Platforms. (2026). <i>React Documentation</i>. Diakses dari https://react.dev</li>
+<li>Vercel Inc. (2026). <i>Next.js Documentation</i>. Diakses dari https://nextjs.org/docs</li>
+<li>OpenJS Foundation. (2026). <i>Express — Node.js Web Application Framework</i>. Diakses dari https://expressjs.com</li>
+<li>MongoDB Inc. (2026). <i>Mongoose ODM Documentation</i>. Diakses dari https://mongoosejs.com</li>
+<li>Fielding, R. T. (2000). <i>Architectural Styles and the Design of Network-based Software Architectures</i> (Disertasi doktoral). University of California, Irvine.</li>
+<li>SmartBear Software. (2026). <i>OpenAPI Specification</i>. Diakses dari https://swagger.io/specification</li>
+</ol>
+
+<h2>LAMPIRAN</h2>
+<ol>
+<li><b>Link repository GitHub:</b> https://github.com/guprann/wisata-indonesia-new</li>
+<li>Screenshot tampilan aplikasi (Gambar 1–6, 13–14)</li>
+<li>Screenshot potongan kode (Gambar 7–12)</li>
+<li>Screenshot dokumentasi API Swagger (http://localhost:4000/api-docs)</li>
+<li>Struktur lengkap proyek</li>
+</ol>
+
+</body>
+</html>
